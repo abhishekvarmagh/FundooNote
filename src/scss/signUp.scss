@@ -1,0 +1,197 @@
+.signup-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-main-container{
+    width: 60%;
+    height: auto;
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dadce0;
+}
+
+.signup-container {
+    width: 87%;
+    height: auto;
+    min-height: 450px;
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-page-container {
+    width: 60%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.titles {
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
+}
+
+.signup-header {
+    width: 100%;
+    color: #202124;
+    font-family: 'Google Sans',arial,sans-serif;
+    padding-bottom: 0;
+    padding-top: 16px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.continue-line{
+    font-size: 16px;
+    letter-spacing: .1px;
+    line-height: 1.5;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.textfield-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.firstname-textfield {
+    width: 48%;
+    padding-top: 16px;
+    padding-bottom: 9px;
+}
+
+.lastname-textfield {
+    width: 48%;
+    padding-top: 16px;
+    padding-bottom: 9px;
+}
+
+.email-textfield {
+    width: 100%;
+}
+
+.email-text {
+    width:100%;
+    padding-bottom: 9px;
+}
+
+.password-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.password-textfield {
+    width: 87%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.password-wrapper {
+    width: 48%;
+    padding-bottom: 9px;
+}
+
+.eye {
+    width: 13%;
+    text-align: center;
+    margin-top: 1.5%;
+}
+
+.signup-image-container {
+    width: 40%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.image-container{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.account-image {
+    width: 80%;
+    height: 100%;
+}
+
+.text-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text {
+    width: 83%;
+    height: auto;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #202124;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+}
+
+@media only screen and (max-width: 414px) and (max-height: 823px ) {
+    .signup-main-container{
+        width: 100%;
+        border: none;
+        align-items: flex-start;
+    }
+    
+    .signup-container {
+        width: 90%;
+    }
+
+    .signup-page-container {
+        width: 100%;
+    }
+
+    .firstname-textfield {
+        width: 100%;
+    }
+
+    .lastname-textfield {
+        width: 100%;
+        padding-top: 0px;
+    }
+
+    .password-wrapper {
+        width: 100%;
+    }
+
+    .signup-image-container {
+        display: none;
+    }
+}
+
+@media only screen and (width: 768px) and (height: 1024px ) {
+    .signup-image-container {
+        display: none;
+    }
+    
+    .signup-page-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (width: 1024px) and (height: 1366px ) {
+    .signup-main-container{
+        width: 80%;
+    }
+}
