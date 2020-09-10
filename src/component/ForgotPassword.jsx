@@ -2,6 +2,7 @@ import React from 'react';
 import '../scss/forgotPassword.scss';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+import CustomSnackBar from './CustomSnackBar'
 import UserAxiosService from '../service/UserAxiosService';
 
 class ForgotPassword extends React.Component {
@@ -9,22 +10,36 @@ class ForgotPassword extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: ''
+            email: '',
+            alertShow: false,
+            alertResponse: "",
         }
     }
+
+    closeAlertBox = () => {
+        this.setState({alertShow: false});
+    };
 
     handleClick = () => {
         const data = {
             "email": this.props.location.state
         }
         new UserAxiosService().forgotPassword(data).then((response) => {
-            console.log(response)
+            this.setState({
+                severity: "success",
+                alertShow: true,
+                alertResponse: response.data.message
+            })
         })
     }
 
     render() {
         return (
             <div className="wrapper">
+                <CustomSnackBar alertShow={this.state.alertShow}
+                    severity={this.state.severity}
+                    alertResponse={this.state.alertResponse}
+                    closeAlertBox={this.closeAlertBox}/>
                 <div className="forgot-main-container">
                     <div className="upper-layer">
                         <div className="title">

@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import UserAxiosService from '../service/UserAxiosService';
+import CustomSnackBar from './CustomSnackBar'
 
 class ChangePassword extends React.Component {
 
@@ -18,7 +19,9 @@ class ChangePassword extends React.Component {
             passwordError: ' ',
             confirmPassword: '',
             confirmPasswordStatus: false,
-            confirmPasswordError: ' '
+            confirmPasswordError: ' ',
+            alertShow: false,
+            alertResponse: "",
         }
     }
 
@@ -31,6 +34,10 @@ class ChangePassword extends React.Component {
             this.validation(target, pattern, message)
         })
     }
+
+    closeAlertBox = () => {
+        this.setState({ alertShow: false });
+    };
 
     validation = (target, pattern, message) => {
         this.setState({
@@ -88,14 +95,21 @@ class ChangePassword extends React.Component {
         }
         if (this.state.password.trim() !== "" && this.state.confirmPassword.trim() !== "") {
             if (this.state.passwordStatus === false && this.state.confirmPasswordStatus === false) {
-                console.log(this.props)
                 const data = {
                     newPassword: this.state.password
                 }
                 new UserAxiosService().resetPassword(data, this.props.match.params.token).then((response) => {
-                    console.log(response)
+                    this.setState({
+                        severity: "success",
+                        alertShow: true,
+                        alertResponse: "Reset Password Successfully"
+                    })
                 }).catch((response) => {
-                    console.log(response)
+                    this.setState({
+                        severity: "error",
+                        alertShow: true,
+                        alertResponse: "Invalid Access Token"
+                    })
                 })
             }
         }
@@ -104,6 +118,10 @@ class ChangePassword extends React.Component {
     render() {
         return (
             <div className="reset-wrapper">
+                <CustomSnackBar alertShow={this.state.alertShow}
+                    severity={this.state.severity}
+                    alertResponse={this.state.alertResponse}
+                    closeAlertBox={this.closeAlertBox} />
                 <div className="reset-container">
                     <div className="reset-password-container">
                         <div className="title">

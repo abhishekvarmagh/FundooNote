@@ -9,6 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router';
 import UserAxiosService from '../service/UserAxiosService'
+import CustomSnackBar from './CustomSnackBar'
 
 class SignIn extends React.Component {
 
@@ -22,7 +23,9 @@ class SignIn extends React.Component {
             emailStatus: false,
             emailError: ' ',
             passwordStatus: false,
-            passwordError: ' '
+            passwordError: ' ',
+            alertShow: false,
+            alertResponse: ""
         }
     }
 
@@ -92,15 +95,33 @@ class SignIn extends React.Component {
             }
             new UserAxiosService().login(data).then((response) => {
                 console.log(response)
+                localStorage.setItem('token', response.data.id)
+                this.setState({
+                    severity: "success",
+                    alertShow: true,
+                    alertResponse: "Login Successfull"
+                })
             }).catch((response) => {
-                console.log(response)
+                this.setState({
+                    severity: "error",
+                    alertShow: true,
+                    alertResponse: "Login Failed"
+                })
             })
         }
     }
 
+    closeAlertBox = () => {
+        this.setState({ alertShow: false });
+    };
+
     render() {
         return (
             <div className="wrapper">
+                <CustomSnackBar alertShow={this.state.alertShow}
+                    severity={this.state.severity}
+                    alertResponse={this.state.alertResponse}
+                    closeAlertBox={this.closeAlertBox} />
                 <div className="container">
                     <div className="signin-container">
                         <div className="title">

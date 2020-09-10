@@ -5,6 +5,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { withRouter } from 'react-router';
 import UserAxiosService from '../service/UserAxiosService'
+import CustomSnackBar from './CustomSnackBar'
 
 class SignUp extends React.Component {
 
@@ -29,6 +30,9 @@ class SignUp extends React.Component {
             emailError: ' ',
             passwordError: ' ',
             confirmPasswordError: ' ',
+
+            alertShow: false,
+            alertResponse: "",
         }
     }
 
@@ -47,8 +51,7 @@ class SignUp extends React.Component {
             [target.name + "Status"]: true,
             [target.name + "Error"]: "Required *"
         })
-        if( target.value.trim() !== '')
-        {
+        if (target.value.trim() !== '') {
             if (target.value.match(pattern)) {
                 this.setState({
                     [target.name + "Status"]: false,
@@ -68,8 +71,7 @@ class SignUp extends React.Component {
             [event.target.name + "Status"]: true,
             [event.target.name + "Error"]: "Required *"
         })
-        if(event.target.value.trim() !== '')
-        {
+        if (event.target.value.trim() !== '') {
             this.setState({ [event.target.name]: event.target.value })
             if (event.target.value !== this.state.password) {
                 this.setState({
@@ -90,15 +92,13 @@ class SignUp extends React.Component {
     }
 
     handleRegistration = () => {
-        if (this.state.firstName.trim() === "")
-        {
+        if (this.state.firstName.trim() === "") {
             this.setState({
                 firstNameStatus: true,
                 firstNameError: 'Required *'
             })
         }
-        if (this.state.lastName.trim() === "")
-        {
+        if (this.state.lastName.trim() === "") {
             this.setState({
                 lastNameStatus: true,
                 lastNameError: 'Required *'
@@ -122,7 +122,7 @@ class SignUp extends React.Component {
                 confirmPasswordError: 'Required *'
             })
         }
-        if (this.state.firstName.trim() !== "" && this.state.lastName.trim() !== "" && this.state.email.trim() !== "" && this.state.password.trim() !== ""  && this.state.confirmPassword.trim() !== "") {
+        if (this.state.firstName.trim() !== "" && this.state.lastName.trim() !== "" && this.state.email.trim() !== "" && this.state.password.trim() !== "" && this.state.confirmPassword.trim() !== "") {
             if (this.state.firstNameStatus === false && this.state.lastNameStatus === false && this.state.emailStatus === false && this.state.passwordStatus === false && this.state.confirmPasswordStatus === false) {
                 const data = {
                     "firstName": this.state.firstName,
@@ -135,17 +135,35 @@ class SignUp extends React.Component {
                     "password": this.state.password
                 }
                 new UserAxiosService().registeration(data).then((response) => {
-                    console.log(response)
+                    this.setState({
+                        severity: "success",
+                        alertShow: true,
+                        alertResponse: "Registration Successfull"
+                    }, () => {
+                        this.props.history.push('/signin')
+                    })
                 }).catch((response) => {
-                    console.log(response)
+                    this.setState({
+                        severity: "error",
+                        alertShow: true,
+                        alertResponse: "Registration Failed"
+                    })
                 })
             }
         }
     }
 
+    closeAlertBox = () => {
+        this.setState({ alertShow: false });
+    };
+
     render() {
         return (
             <div className="signup-wrapper">
+                <CustomSnackBar alertShow={this.state.alertShow}
+                    severity={this.state.severity}
+                    alertResponse={this.state.alertResponse}
+                    closeAlertBox={this.closeAlertBox} />
                 <div className="signup-main-container">
                     <div className="signup-container">
                         <div className="signup-page-container">
