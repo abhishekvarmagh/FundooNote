@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { withRouter } from 'react-router';
+import UserAxiosService from '../service/UserAxiosService'
 
 class SignUp extends React.Component {
 
@@ -120,6 +121,25 @@ class SignUp extends React.Component {
                 confirmPasswordStatus: true,
                 confirmPasswordError: 'Required *'
             })
+        }
+        if (this.state.firstName.trim() !== "" && this.state.lastName.trim() !== "" && this.state.email.trim() !== "" && this.state.password.trim() !== ""  && this.state.confirmPassword.trim() !== "") {
+            if (this.state.firstNameStatus === false && this.state.lastNameStatus === false && this.state.emailStatus === false && this.state.passwordStatus === false && this.state.confirmPasswordStatus === false) {
+                const data = {
+                    "firstName": this.state.firstName,
+                    "lastName": this.state.lastName,
+                    "phoneNumber": "",
+                    "imageUrl": "",
+                    "service": "advance",
+                    "email": this.state.email,
+                    "cartId": "",
+                    "password": this.state.password
+                }
+                new UserAxiosService().registeration(data).then((response) => {
+                    console.log(response)
+                }).catch((response) => {
+                    console.log(response)
+                })
+            }
         }
     }
 

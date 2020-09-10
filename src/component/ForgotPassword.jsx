@@ -2,6 +2,7 @@ import React from 'react';
 import '../scss/forgotPassword.scss';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+import UserAxiosService from '../service/UserAxiosService';
 
 class ForgotPassword extends React.Component {
 
@@ -10,6 +11,15 @@ class ForgotPassword extends React.Component {
         this.state = {
             email: ''
         }
+    }
+
+    handleClick = () => {
+        const data = {
+            "email": this.props.location.state
+        }
+        new UserAxiosService().forgotPassword(data).then((response) => {
+            console.log(response)
+        })
     }
 
     render() {
@@ -45,7 +55,7 @@ class ForgotPassword extends React.Component {
                     <div className="bottom-layer">
                         <div className="notification-line">Fundoo will sent a notification to your email. Tap <b>Yes</b> to continue</div>
                         <div className="tap-yes">
-                            <button className="yes-button">Yes</button>
+                            <button className="yes-button" onClick={this.handleClick}>Yes</button>
                         </div>
                     </div>
                 </div>

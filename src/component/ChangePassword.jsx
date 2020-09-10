@@ -5,6 +5,7 @@ import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import UserAxiosService from '../service/UserAxiosService';
 
 class ChangePassword extends React.Component {
 
@@ -84,6 +85,19 @@ class ChangePassword extends React.Component {
                 confirmPasswordStatus: true,
                 confirmPasswordError: 'Required *'
             })
+        }
+        if (this.state.password.trim() !== "" && this.state.confirmPassword.trim() !== "") {
+            if (this.state.passwordStatus === false && this.state.confirmPasswordStatus === false) {
+                console.log(this.props)
+                const data = {
+                    newPassword: this.state.password
+                }
+                new UserAxiosService().resetPassword(data, this.props.match.params.token).then((response) => {
+                    console.log(response)
+                }).catch((response) => {
+                    console.log(response)
+                })
+            }
         }
     }
 

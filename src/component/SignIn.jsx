@@ -8,6 +8,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router';
+import UserAxiosService from '../service/UserAxiosService'
 
 class SignIn extends React.Component {
 
@@ -21,7 +22,7 @@ class SignIn extends React.Component {
             emailStatus: false,
             emailError: ' ',
             passwordStatus: false,
-            passwordError: ' ',
+            passwordError: ' '
         }
     }
 
@@ -89,6 +90,11 @@ class SignIn extends React.Component {
                 "email": this.state.email,
                 "password": this.state.password
             }
+            new UserAxiosService().login(data).then((response) => {
+                console.log(response)
+            }).catch((response) => {
+                console.log(response)
+            })
         }
     }
 
