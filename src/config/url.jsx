@@ -1,3 +1,3 @@
 module.exports = {
-    apiURL: 'http://fundoonotes.incubation.bridgelabz.com/api/'
+    apiURL: process.env.REACT_APP_API_URL
 }
