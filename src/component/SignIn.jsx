@@ -93,14 +93,15 @@ class SignIn extends React.Component {
                 "email": this.state.email,
                 "password": this.state.password
             }
-            new UserAxiosService().login(data).then((response) => {
-                console.log(response)
+            UserAxiosService.login(data).then((response) => {
+                console.log(response.data)
                 localStorage.setItem('token', response.data.id)
                 this.setState({
                     severity: "success",
                     alertShow: true,
                     alertResponse: "Login Successfull"
                 })
+                this.props.history.push('/dashboard')
             }).catch((response) => {
                 this.setState({
                     severity: "error",

@@ -24,7 +24,7 @@ class ForgotPassword extends React.Component {
         const data = {
             "email": this.props.location.state
         }
-        new UserAxiosService().forgotPassword(data).then((response) => {
+        UserAxiosService.forgotPassword(data).then((response) => {
             this.setState({
                 severity: "success",
                 alertShow: true,

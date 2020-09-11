@@ -1,15 +1,12 @@
-import Axios from "axios";
-import URL from '../config/url'
+import axios from "axios";
 
-function post(url, data) {
-    return Axios({
-        method: 'post',
-        url: `${URL.apiURL}${url}`,
-        data: data,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+export default function axiosService(){
 }
 
-export {post}
+axiosService.prototype.get = function get(URL,isHeaderReq = false ,header) {
+    return axios.get(URL, isHeaderReq && header);
+}
+
+axiosService.prototype.post = function post(URL, data, isHeaderReq = false ,header) {
+    return axios.post(URL, data, isHeaderReq && header)
+}

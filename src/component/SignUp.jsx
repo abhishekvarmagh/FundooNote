@@ -134,7 +134,7 @@ class SignUp extends React.Component {
                     "cartId": "",
                     "password": this.state.password
                 }
-                new UserAxiosService().registeration(data).then((response) => {
+                UserAxiosService.registeration(data).then((response) => {
                     this.setState({
                         severity: "success",
                         alertShow: true,
@@ -146,7 +146,7 @@ class SignUp extends React.Component {
                     this.setState({
                         severity: "error",
                         alertShow: true,
-                        alertResponse: "Registration Failed"
+                        alertResponse: "User Already Register"
                     })
                 })
             }
@@ -210,7 +210,7 @@ class SignUp extends React.Component {
                         </div>
                         <div className="signup-image-container">
                             <div className="image-container">
-                                <img className="account-image" alt="No image found" src={require('../assets/account.svg')} />
+                                <img className="account-image" alt="Image Not found" src={require('../assets/account.svg')} />
                             </div>
                             <div className="text-container">
                                 <div className="text">One account. All of Fundoo working for you.</div>

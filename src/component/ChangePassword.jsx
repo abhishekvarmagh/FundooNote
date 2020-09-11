@@ -6,7 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import UserAxiosService from '../service/UserAxiosService';
-import CustomSnackBar from './CustomSnackBar'
+import CustomSnackBar from './CustomSnackBar';
+import {withRouter} from 'react-router-dom';
 
 class ChangePassword extends React.Component {
 
@@ -98,11 +99,13 @@ class ChangePassword extends React.Component {
                 const data = {
                     newPassword: this.state.password
                 }
-                new UserAxiosService().resetPassword(data, this.props.match.params.token).then((response) => {
+                UserAxiosService.resetPassword(data, this.props.match.params.token).then((response) => {
                     this.setState({
                         severity: "success",
                         alertShow: true,
                         alertResponse: "Reset Password Successfully"
+                    }, () => {
+                        this.props.history.push('/signin')
                     })
                 }).catch((response) => {
                     this.setState({
@@ -169,4 +172,4 @@ class ChangePassword extends React.Component {
     }
 }
 
-export default ChangePassword;
+export default withRouter(ChangePassword);
