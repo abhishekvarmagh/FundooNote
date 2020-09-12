@@ -1,0 +1,22 @@
+$displayProperty: flex;
+$primaryColor: #1a73e8;
+
+fixedBody {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flexCenter {
+    display: $displayProperty;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexDirection($direction) {
+    display: $displayProperty;
+    flex-direction: $direction;
+}
