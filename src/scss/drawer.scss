@@ -1,0 +1,18 @@
+.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
+    color: #202124;
+    letter-spacing: .01785714em;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: .875rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+}
+
+.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button:hover {
+    background-color: rgb(254, 239, 195);
+}
+
