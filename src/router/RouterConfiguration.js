@@ -14,6 +14,7 @@ class RouterConfiguration extends React.Component {
                     <Route path={"/signup"} exact component={SignUp} />
                     <Route path={"/resetpassword/:token"} excat component={ChangePassword} />
                     <Route path={"/forgotpassword"} exact component={ForgotPassword} />
+                    <ProtectedRoute path={"/dashboard"} component={DashBoard} />
                 </Switch>
             </BrowserRouter>
         )
