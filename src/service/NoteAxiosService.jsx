@@ -12,6 +12,10 @@ import URL from '../config/url';
         return this.axiosservice.post(URL.apiURL+'notes/addNotes', data, true, this.getHeader());
     }
 
+    getNotes() {
+        return this.axiosservice.get(URL.apiURL+'notes/getNotesList', true, this.getHeader());
+    }
+
     getHeader = () => {
         return {
             headers: {
