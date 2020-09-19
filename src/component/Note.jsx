@@ -20,6 +20,7 @@ class Note extends React.Component {
         NoteAxiosService.getNotes().then((response) => {
             this.setState({notesDetails: response.data.data.data.filter((note) => note.isDeleted === false && note.isArchived === false)})
         })
+        this.props.call("")
     }
 
     componentDidMount(){
@@ -27,24 +28,39 @@ class Note extends React.Component {
     }
 
     render(){
+        if (this.props.apiName === "NOTES"){
+            this.getNotes();
+        }
         return(
-            <div className="items-container">
-                <div className="notes-container">
-                    <AddNote />
-                </div>
-                { this.state.notesDetails.length == 0 ? 
-                    <div className="note-list">
-                        <div className="add-note-here">
-                            <EmojiObjectsOutlinedIcon style={{width:'100%',height:'100%'}} color="disabled" />
-                        </div>
-                        <div className="note-text">Notes you add appear here</div>
+                <div className="items-container">
+                    <div className="notes-container">
+                        <AddNote />
                     </div>
-                    :
-                    <DisplayNote noteDetails={this.state.notesDetails} />
-                }
-            </div>
+                    { this.state.notesDetails.length == 0 ? 
+                        <div className="note-list">
+                            <div className="add-note-here">
+                                <EmojiObjectsOutlinedIcon style={{width:'100%',height:'100%'}} color="disabled" />
+                            </div>
+                            <div className="note-text">Notes you add appear here</div>
+                        </div>
+                        :
+                        <DisplayNote noteDetails={this.state.notesDetails} />
+                    }
+                </div>
         )
     }
 }
 
-export default Note; 
+const mapToStateProps = state => {
+    return {
+        apiName: state.api.apiName
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        call: (apiName)=> dispatch(noCallApi(apiName))
+    }
+}
+
+export default connect(mapToStateProps, mapDispatchToProps)(Note); 

@@ -7,6 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
 import NoteAxiosService from '../service/NoteAxiosService';
+import { callApi } from '../redux/action/ApiCall';
+import {connect} from 'react-redux';
+import BinIcon from './BinIcon'
+import Masonry from 'react-masonry-css'
 
 const styles = theme =>({
     root: {
@@ -56,6 +60,8 @@ class NoteCard extends React.Component {
         }
         NoteAxiosService.updateNote(data).then((response) => {
             console.log(response)
+            // this.props.updateNote()
+            this.props.call("NOTES")
         })
         this.setState({isDialogVisible: false});
     }
@@ -65,6 +71,7 @@ class NoteCard extends React.Component {
     }
 
     handleUpdate = (id, title, description) => {
+        // this.setState({noteDetails: this.props.noteDetails.filter((noteDetails) => noteDetails.id == id)})
         this.setState({isDialogVisible: true , id: id,title: title, description: description})
     }
 
@@ -79,11 +86,21 @@ class NoteCard extends React.Component {
             noteIdList: [id]
         }
         NoteAxiosService.changesColorNotes(data).then((response) => {
+            console.log()
+            this.props.call("NOTES")
         })
     }
 
     render(){
         const { classes } = this.props;
+        const url = window.location.href.substring(window.location.href.lastIndexOf('/')+1);
+        const breakpointColumnsObj = {
+            default: 4,
+            1125: 3,
+            954: 3,
+            700: 2,
+            500: 1
+          };
         return(
             <div class="flex-container">
                 <Masonry breakpointCols={breakpointColumnsObj} style={{width:'100%',display:'flex',flexFlow:'wrap'}}>
@@ -131,4 +148,10 @@ class NoteCard extends React.Component {
     }
 }
 
-export default NoteCard;
+const mapDispatchToProps = dispatch => {
+    return {
+        call: (apiName)=> dispatch(callApi(apiName))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withStyles(styles)(NoteCard));
