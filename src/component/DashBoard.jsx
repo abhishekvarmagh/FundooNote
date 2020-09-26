@@ -4,8 +4,11 @@ import NavBar from './NavBar';
 import Drawer from './Drawer';
 import Logout from './Logout';
 import Note from "./Note";
+import Bin from "./Bin";
+import Archive from './Archive'
 import { withRouter } from 'react-router-dom';
-import {Route} from 'react-router-dom'
+import ProtectedRoute from '../router/ProtectedRoute'
+import {Route, Switch} from 'react-router-dom'
 
 class DashBoard extends React.Component {
 
@@ -34,6 +37,12 @@ class DashBoard extends React.Component {
                     <div className="add-notes">
                         <Route path={"/dashboard/notes"}>
                             <Note />
+                        </Route>
+                        <Route path={"/dashboard/bin"}>
+                            <Bin />
+                        </Route>
+                        <Route path={"/dashboard/archive"}>
+                            <Archive />
                         </Route>
                     </div>
                 </div>

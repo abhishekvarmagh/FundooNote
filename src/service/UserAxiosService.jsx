@@ -1,25 +1,4 @@
-import { post } from './AxiosService';
-
-class UserAxiosService {
-
-    registeration(data) {
-        return (post("user/userSignUp", data))
-    }
-
-    login(data) {
-        return (post("user/login", data))
-    }
-
-    forgotPassword(data) {
-        return (post("user/reset", data))
-    }
-
-    resetPassword(data, token) {
-        return (post(`user/reset-password?access_token=${token}`, data))
-    }
-}
-
-export default UserAxiosServiceimport axiosservice from './AxiosService'; 
+import axiosservice from './AxiosService'; 
 import URL from '../config/url';
 
 class UserAxiosService {
